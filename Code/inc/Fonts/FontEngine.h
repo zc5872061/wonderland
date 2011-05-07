@@ -80,6 +80,8 @@ private:
     
     FontEngine();
     ~FontEngine();
+    FontEngine(const FontEngine&);
+    FontEngine& operator=(const FontEngine&);
 };
 
 #endif // _FONT_ENGINE_H_

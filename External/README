@@ -13,6 +13,14 @@ There are two reasons why they are put into the source tree:
 * Some of the projects requrie minor changes to be compiled for the platforms,
   e.g. there are some modules disabled in Freetype
 
+
+
+Libraries included in this directory
+===========================================
+
+* boost - under Boost Software License
+* Freetype 2 - under FreeType License
+
 -------------------------------------------
 
 Copyright (c) 2011, Artur Mazurek

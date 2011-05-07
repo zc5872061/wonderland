@@ -10,7 +10,7 @@
 
 @class XCodeProjectViewController;
 
-@interface XCodeProject : NSObject <UIApplicationDelegate> {
+@interface XCodeProjectAppDelegate : NSObject <UIApplicationDelegate> {
 
 }
 
