@@ -13,6 +13,7 @@
 class GameRunnable
 {
 public:
+    virtual ~GameRunnable() {};
 	virtual void run() = 0;
 };
 

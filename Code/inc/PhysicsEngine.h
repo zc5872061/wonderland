@@ -27,6 +27,7 @@ public:
 class AnimationListener
 {
 public:
+    virtual ~AnimationListener() {};
 	virtual void animationFinished(Actor* target) = 0;
 };
 
