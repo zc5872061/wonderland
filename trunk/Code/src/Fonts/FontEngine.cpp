@@ -12,10 +12,6 @@
 #include <stdio.h>
 #include <sstream>
 
-#include "pi/bada/BadaFile.h" // TODO: remove this
-static unsigned char* gBuffer;
-static int gSize;
-
 static std::string _createKey(const std::string& text, int size)
 {
     std::stringstream ss;
@@ -29,7 +25,7 @@ FontEngine::FontEngine() :
     m_face(0),
     m_size(12)
 {
-    m_fontFaces["BaroqueScript.ttf"] = shared_ptr<GameBitmap>();
+    m_fontFaces["mailrays.ttf"] = shared_ptr<GameBitmap>();
 }
 
 FontEngine::~FontEngine()
@@ -51,23 +47,12 @@ void FontEngine::initialize()
 void FontEngine::loadFace(const std::string& fileName)
 {
     std::string fullPath = Constants::getRootPath() + Constants::getFontsDir() + fileName;
-    
-    static shared_ptr<GameFile> f = GameFile::openFile(fullPath, "rb");
-    BadaFile* file = dynamic_cast<BadaFile*>(f.get());
-    assert(file);
-    if(gBuffer == 0)
-    {
-    	gBuffer = new unsigned char[file->size];
-    }
-    memcpy(gBuffer, file->buffer, file->size);
-    gSize = file->size;
 
     Log("Opening font at %s", fullPath.c_str());
 
     FT_Face face;
     
-//    int error = FT_New_Face(m_library, fullPath.c_str(), 0, &face);
-    int error = FT_New_Memory_Face(m_library, gBuffer, gSize, 0, &face);
+    int error = FT_New_Face(m_library, fullPath.c_str(), 0, &face);
     if(error == FT_Err_Unknown_File_Format)
     {
         assert(!"Font file found but with wrong format. Oops.");
