@@ -1,0 +1,13 @@
+[shaders]
+
+vertex=Shaders/vertex_default.fx
+fragment=Shaders/fragment_default.fx
+
+[engine]
+
+u_mvpMatrix=map:'modelviewprojection';size:'matrix';
+
+[input]
+
+a_position=map:'position';size:4;
+
