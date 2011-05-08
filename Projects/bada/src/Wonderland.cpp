@@ -1,116 +1,294 @@
-/**
- * Name        : Wonderland
- * Version     : 
- * Vendor      : 
- * Description : 
- */
-
-
 #include "Wonderland.h"
-#include "Form1.h"
+#include "MathHelper.h"
+#include "Actor.h"
+#include "GLRenderer.h"
+#include "Game.h"
+#include "BallsGameController.h"
+#include "BallsHUD.h"
 
-using namespace Osp::App;
+#include <cmath>
+#include <algorithm>
+#include <functional>
+
 using namespace Osp::Base;
+using namespace Osp::Base::Runtime;
+using namespace Osp::Graphics;
+using namespace Osp::Locales;
+using namespace Osp::System;
+using namespace Osp::App;
 using namespace Osp::System;
 using namespace Osp::Ui;
 using namespace Osp::Ui::Controls;
+using namespace Osp::Graphics::Opengl;
 
-Wonderland::Wonderland()
+class GlesForm :
+	public Osp::Ui::Controls::Form
+{
+public:
+	GlesForm(Wonderland* pApp)
+	: __pApp(pApp)
+	{
+	}
+	virtual ~GlesForm(void)
+	{
+	}
+
+public:
+	virtual result OnDraw(void)
+	{
+		if (__pApp)
+		{
+			Game::getInstance().getRenderer().renderFrame();
+		}
+		return E_SUCCESS;
+	}
+
+private:
+	Wonderland* __pApp;
+};
+
+
+Wonderland::Wonderland() :
+	__angle(0.0f),
+	__pTimer(null),
+	__pForm(null),
+	m_lastFrameTime(0)
 {
 }
+
 
 Wonderland::~Wonderland()
 {
 }
 
+
+void
+Wonderland::Cleanup()
+{
+	if (__pTimer)
+	{
+		__pTimer->Cancel();
+		delete __pTimer;
+		__pTimer = null;
+	}
+}
+
+
 Application*
 Wonderland::CreateInstance(void)
 {
-	// Create the instance through the constructor.
 	return new Wonderland();
 }
+
 
 bool
 Wonderland::OnAppInitializing(AppRegistry& appRegistry)
 {
-	// TODO:
-	// Initialize UI resources and application specific data.
-	// The application's permanent data and context can be obtained from the appRegistry.
-	//
-	// If this method is successful, return true; otherwise, return false.
-	// If this method returns false, the application will be terminated.
+	result r = E_SUCCESS;
+	IAppFrame* pAppFrame = GetAppFrame();
 
-	// Uncomment the following statement to listen to the screen on/off events.
-	//PowerManager::SetScreenEventListener(*this);
+	__pForm = new GlesForm(this);
+	if (null == __pForm)
+	{
+		AppLog("[Wonderland] Allocation of GlesForm has failed.\n");
+		Cleanup();
+		return false;
+	}
 
-	// Create a form
-	Form1 *pForm1 = new Form1();
-	pForm1->Initialize();
+	r = __pForm->Construct(FORM_STYLE_NORMAL);
+	if (IsFailed(r))
+	{
+		AppLog("[Wonderland] __pForm->Construct(FORM_STYLE_NORMAL) has failed.\n");
+		delete __pForm;
+		__pForm = null;
+		return false;
+	}
 
-	// Add the form to the frame
-	Frame *pFrame = GetAppFrame()->GetFrame();
-	pFrame->AddControl(*pForm1);
+	__pForm->SetOrientation(ORIENTATION_LANDSCAPE);
 
-	// Set the current form
-	pFrame->SetCurrentForm(*pForm1);
+	r = GetAppFrame()->GetFrame()->AddControl(*__pForm);
+	if (IsFailed(r))
+	{
+		AppLog("[Wonderland] GetAppFrame()->GetFrame()->AddControl(*__pForm) has failed.\n");
+		delete __pForm;
+		__pForm = null;
+		return false;
+	}
 
-	// Draw and Show the form
-	pForm1->Draw();
-	pForm1->Show();
+	if (null == pAppFrame)
+	{
+		Cleanup();
+		return false;
+	}
+
+	r = pAppFrame->AddKeyEventListener(*this);
+	if (IsFailed(r))
+	{
+		Cleanup();
+		return false;
+	}
+
+//	if(!Game::getInstance().initializeGraphics((EGLNativeWindowType)__pForm))
+//	{
+//		Cleanup();
+//		AppLog("Could not initializeGraphics");
+//		return false;
+//	}
+
+	__pTimer = new Timer;
+	if (null == __pTimer)
+	{
+		Cleanup();
+		return false;
+	}
+	r = __pTimer->Construct(*this);
+	if (IsFailed(r))
+	{
+		Cleanup();
+		return false;
+	}
+
+	// Comment the following statement to stop listen to the screen on/off events.
+	PowerManager::SetScreenEventListener(*this);
+
+
+	BallsGameController* controller = new BallsGameController();
+//	controller->setDifficulty(BallsGameController::GD_EASY);
+//	Game::getInstance().initializeController(controller);
+//	Log("Before set HUD");
+//	Game::getInstance().setHUD(std::auto_ptr<HUD>(new BallsHUD(SCREEN_WIDTH, SCREEN_HEIGHT)));
+	Game::getInstance().initialize(std::auto_ptr<GameController>(controller), std::auto_ptr<HUD>(new BallsHUD()));
+	Game::getInstance().initializeGraphics((EGLNativeWindowType)__pForm);
+//	Game::getInstance().initializeActors();
+//	Game::getInstance().getRenderer().getCamera().initialize(SCREEN_WIDTH, SCREEN_HEIGHT, 27, 1, 100, Vector(0, 0, -20));
+//	Game::getInstance().getHUD().initialize();
+//	Game::getInstance().getResourceManager().initialize();
+//	Game::getInstance().getMaterialsManager().initialize();
+
+
+	__pForm->AddTouchEventListener(*this);
 
 	return true;
 }
+
 
 bool
 Wonderland::OnAppTerminating(AppRegistry& appRegistry, bool forcedTermination)
 {
-	// TODO:
-	// Deallocate resources allocated by this application for termination.
-	// The application's permanent data and context can be saved via appRegistry.
+	Cleanup();
+	Game::cleanup();
+
 	return true;
 }
+
 
 void
 Wonderland::OnForeground(void)
 {
-	// TODO:
-	// Start or resume drawing when the application is moved to the foreground.
+	if(__pTimer)
+	{
+		__pTimer->Start(DEFAULT_FRAME_TIME);
+	}
 }
+
 
 void
 Wonderland::OnBackground(void)
 {
-	// TODO:
-	// Stop drawing when the application is moved to the background.
+	if(__pTimer)
+	{
+		__pTimer->Cancel();
+	}
 }
 
-void
-Wonderland::OnLowMemory(void)
-{
-	// TODO:
-	// Free unused resources or close the application.
-}
 
 void
 Wonderland::OnBatteryLevelChanged(BatteryLevel batteryLevel)
 {
-	// TODO:
-	// Handle any changes in battery level here.
-	// Stop using multimedia features(camera, mp3 etc.) if the battery level is CRITICAL.
+}
+
+
+void
+Wonderland::OnLowMemory(void)
+{
+}
+
+void
+Wonderland::OnKeyPressed(const Control& source, KeyCode keyCode)
+{
+	Log("KeyPressed");
+}
+
+
+void
+Wonderland::OnKeyReleased(const Control& source, KeyCode keyCode)
+{
+}
+
+
+void
+Wonderland::OnKeyLongPressed(const Control& source, KeyCode keyCode)
+{
+}
+
+void
+Wonderland::OnTimerExpired(Timer& timer)
+{
+	if (!__pTimer)
+	{
+		return;
+	}
+
+
+	long long ticks1 = 0;
+	SystemTime::GetTicks(ticks1);
+
+
+
+	Game::getInstance().getRenderer().getCamera().engineUpdate(DEFAULT_FRAME_TIME);
+	Game::getInstance().update(DEFAULT_FRAME_TIME);
+
+	Game::getInstance().getRenderer().renderFrame();
+
+	long long ticks2 = 0;
+	SystemTime::GetTicks(ticks2);
+
+	int frameTime = static_cast<int>(ticks2 - ticks1);
+	int newTimeOut = DEFAULT_FRAME_TIME - frameTime;
+	if(newTimeOut < MINIMUM_FRAME_TIME)
+	{
+		newTimeOut = MINIMUM_FRAME_TIME;
+	}
+
+//	Log("New timeout - %d, frameTime - %d", newTimeOut, frameTime);
+
+	__pTimer->Start(newTimeOut);
 }
 
 void
 Wonderland::OnScreenOn (void)
 {
-	// TODO:
-	// Get the released resources or resume the operations that were paused or stopped in OnScreenOff().
+	if(__pTimer)
+	{
+		__pTimer->Start(DEFAULT_FRAME_TIME);
+	}
 }
 
 void
 Wonderland::OnScreenOff (void)
 {
-	// TODO:
-	//  Unless there is a strong reason to do otherwise, release resources (such as 3D, media, and sensors) to allow the device to enter the sleep mode to save the battery.
-	// Invoking a lengthy asynchronous method within this listener method can be risky, because it is not guaranteed to invoke a callback before the device enters the sleep mode.
-	// Similarly, do not perform lengthy operations in this listener method. Any operation must be a quick one.
+	if(__pTimer)
+	{
+		__pTimer->Cancel();
+	}
+}
+
+void Wonderland::OnTouchPressed(const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo)
+{
+	Game::getInstance().touchPressed(currentPosition.x,SCREEN_HEIGHT - currentPosition.y);
+}
+
+void Wonderland::OnTouchReleased(const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo)
+{
+	Game::getInstance().touchReleased(currentPosition.x,SCREEN_HEIGHT - currentPosition.y);
 }

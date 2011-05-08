@@ -80,4 +80,16 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.ScannerConfigNature</nature>
 		<nature>com.osp.ide.badaNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>Includes</name>
+			<type>2</type>
+			<locationURI>WONDERLAND_ROOT/Code/inc</locationURI>
+		</link>
+		<link>
+			<name>Sources</name>
+			<type>2</type>
+			<locationURI>WONDERLAND_ROOT/Code/src</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>

@@ -1,0 +1,1 @@
+-L"C:/bada/1.2.1/Model/Wave_LP1/Simulator" -L"C:/bada/1.2.1/Lib" -L"C:/Users/Artur/Documents/Programowanie/wonderland/Projects/bada/lib" -shared -o"Wonderland.exe"

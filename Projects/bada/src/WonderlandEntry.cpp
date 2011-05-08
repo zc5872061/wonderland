@@ -11,7 +11,9 @@ extern "C"
 {
 #endif // __cplusplus
 
+
 _EXPORT_ int OspMain(int argc, char *pArgv[]);
+
 
 /**
  * The entry function of bada application called by the operating system.

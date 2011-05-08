@@ -79,7 +79,11 @@ namespace boost
   #ifndef BOOST_ASSERT_HPP
     #define BOOST_ASSERT_HPP
     #include <cstdlib>
-    #include <iostream>
+	#ifndef SHP // No iostream on bada...
+		#include <iostream>
+	#else
+		#include <FBase.h> // so instead let's use AppLog
+	#endif
     #include <boost/current_function.hpp>
 
     //  IDE's like Visual Studio perform better if output goes to std::cout or
@@ -97,11 +101,16 @@ namespace boost
           inline void assertion_failed_msg(char const * expr, char const * msg, char const * function,
             char const * file, long line)
           {
+#ifndef SHP
             BOOST_ASSERT_MSG_OSTREAM
               << "***** Internal Program Error - assertion (" << expr << ") failed in "
               << function << ":\n"
               << file << '(' << line << "): " << msg << std::endl;
             std::abort();
+#else
+			AppLogException("***** Internal Program Error - assertion (%s) failed in %s : %s (%ld): %s", expr, function, file, line, msg);
+			AppAssert(0);
+#endif
           }
         } // detail
       } // assertion
