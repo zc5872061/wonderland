@@ -29,6 +29,13 @@
 <builder buildPath="${workspace_loc:/Wonderland/.Simulator-Debug}" command="cs-make" id="cdt.managedbuild.target.osp.gnu.simul.builder.exe.simul.432031350" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="bada Builder" superClass="cdt.managedbuild.target.osp.gnu.simul.builder.exe.simul"/>
 <tool id="cdt.managedbuild.tool.osp.gnu.arm.archiver.base.861027008" name="bada Archiver" superClass="cdt.managedbuild.tool.osp.gnu.arm.archiver.base"/>
 <tool id="cdt.managedbuild.tool.osp.gnu.simul.cpp.compiler.exe.simul.1048341433" name="bada C++ Compiler" superClass="cdt.managedbuild.tool.osp.gnu.simul.cpp.compiler.exe.simul">
+<option id="osp.gnu.cpp.compiler.simual.exe.option.include.paths.1451354759" name="Include paths (-I)" superClass="osp.gnu.cpp.compiler.simual.exe.option.include.paths" valueType="includePath">
+<listOptionValue builtIn="false" value="&quot;${SDKROOT}/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../../External/Freetype&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/../../External/Boost&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/Wonderland/Includes}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/inc&quot;"/>
+</option>
 <inputType id="cdt.managedbuild.tool.osp.gnu.cpp.compiler.input.870502008" superClass="cdt.managedbuild.tool.osp.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.osp.gnu.simul.c.compiler.exe.simul.1600217473" name="bada C Compiler" superClass="cdt.managedbuild.tool.osp.gnu.simul.c.compiler.exe.simul">
@@ -36,6 +43,13 @@
 </tool>
 <tool id="cdt.managedbuild.tool.osp.gnu.simul.c.linker.exe.simul.141888429" name="bada C Linker" superClass="cdt.managedbuild.tool.osp.gnu.simul.c.linker.exe.simul"/>
 <tool id="cdt.managedbuild.tool.osp.gnu.simul.cpp.linker.exe.simul.1422620795" name="bada C++ Linker" superClass="cdt.managedbuild.tool.osp.gnu.simul.cpp.linker.exe.simul">
+<option id="osp.gnu.cpp.link.simual.debug.option.libs.1034134561" superClass="osp.gnu.cpp.link.simual.debug.option.libs" valueType="libs">
+<listOptionValue builtIn="false" value="osp_rt0"/>
+<listOptionValue builtIn="false" value="FGraphicsOpengl"/>
+<listOptionValue builtIn="false" value="FGraphicsEgl"/>
+<listOptionValue builtIn="false" value="libc-newlib"/>
+<listOptionValue builtIn="false" value="FOsp"/>
+</option>
 <inputType id="cdt.managedbuild.tool.osp.gnu.cpp.linker.input.1538828528" superClass="cdt.managedbuild.tool.osp.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -46,7 +60,25 @@
 </tool>
 </toolChain>
 </folderInfo>
+<folderInfo id="cdt.managedbuild.config.osp.gnu.arm.exe.simul.2020618802.285850575" name="/" resourcePath="Sources">
+<toolChain id="cdt.managedbuild.toolchain.osp.gnu.arm.exe.simul.440161803" name="bada GCC ToolChain" superClass="cdt.managedbuild.toolchain.osp.gnu.arm.exe.simul" unusedChildren="">
+<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.Cygwin_PE;org.eclipse.cdt.core.GNU_ELF;org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.osp.gnu.simul.platform.exe.simul" name="Debug Platform" osList="osp" superClass="cdt.managedbuild.target.osp.gnu.simul.platform.exe.simul"/>
+<tool id="cdt.managedbuild.tool.osp.gnu.arm.archiver.base.606234769" name="bada Archiver" superClass="cdt.managedbuild.tool.osp.gnu.arm.archiver.base.861027008"/>
+<tool id="cdt.managedbuild.tool.osp.gnu.simul.cpp.compiler.exe.simul.1985893540" name="bada C++ Compiler" superClass="cdt.managedbuild.tool.osp.gnu.simul.cpp.compiler.exe.simul.1048341433">
+<inputType id="cdt.managedbuild.tool.osp.gnu.cpp.compiler.input.1210296515" superClass="cdt.managedbuild.tool.osp.gnu.cpp.compiler.input"/>
+</tool>
+<tool id="cdt.managedbuild.tool.osp.gnu.simul.c.compiler.exe.simul.1825062791" name="bada C Compiler" superClass="cdt.managedbuild.tool.osp.gnu.simul.c.compiler.exe.simul.1600217473">
+<inputType id="cdt.managedbuild.tool.osp.gnu.c.compiler.input.1642995027" superClass="cdt.managedbuild.tool.osp.gnu.c.compiler.input"/>
+</tool>
+<tool id="cdt.managedbuild.tool.osp.gnu.simul.c.linker.exe.simul.305052696" name="bada C Linker" superClass="cdt.managedbuild.tool.osp.gnu.simul.c.linker.exe.simul.141888429"/>
+<tool id="cdt.managedbuild.tool.osp.gnu.simul.cpp.linker.exe.simul.387558893" name="bada C++ Linker" superClass="cdt.managedbuild.tool.osp.gnu.simul.cpp.linker.exe.simul.1422620795"/>
+<tool id="cdt.managedbuild.tool.osp.gnu.simul.assembler.exe.simul.1046170300" name="bada Assembler" superClass="cdt.managedbuild.tool.osp.gnu.simul.assembler.exe.simul.1048857158">
+<inputType id="cdt.managedbuild.tool.osp.gnu.assembler.input.1930585950" superClass="cdt.managedbuild.tool.osp.gnu.assembler.input"/>
+</tool>
+</toolChain>
+</folderInfo>
 <sourceEntries>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Sources"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="inc"/>
 </sourceEntries>
@@ -136,6 +168,8 @@
 </profile>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
 </cconfiguration>
 <cconfiguration id="cdt.managedbuild.config.osp.gnu.target.exe.debug.344583802">
 <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.osp.gnu.target.exe.debug.344583802" moduleId="org.eclipse.cdt.core.settings" name="Target-Debug">
@@ -270,6 +304,8 @@
 </profile>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
 </cconfiguration>
 <cconfiguration id="cdt.managedbuild.config.osp.gnu.target.exe.release.1360045431">
 <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.osp.gnu.target.exe.release.1360045431" moduleId="org.eclipse.cdt.core.settings" name="Target-Release">
@@ -404,6 +440,8 @@
 </profile>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">

@@ -1,26 +1,29 @@
 #ifndef _WONDERLAND_H_
-#define _WONDERLAND_H_
+#define _WONDERLAND_H
 
-#include <FApp.h>
+#ifndef IOS
+
 #include <FBase.h>
 #include <FSystem.h>
+#include <FGraphics.h>
 #include <FUi.h>
+#include <FApp.h>
+#include <FGraphicsOpengl2.h>
 
-/**
- * [Wonderland] application must inherit from Application class
- * which provides basic features necessary to define an application.
- */
+#include <vector>
+
+#include "Game.h"
+#include "MathHelper.h"
+
 class Wonderland :
 	public Osp::App::Application,
-	public Osp::System::IScreenEventListener
+	public Osp::System::IScreenEventListener,
+	public Osp::Ui::IKeyEventListener,
+	public Osp::Base::Runtime::ITimerEventListener,
+	public Osp::Ui::ITouchEventListener
 {
 public:
-
-	/**
-	 * [Wonderland] application must have a factory method that creates an instance of itself.
-	 */
 	static Osp::App::Application* CreateInstance(void);
-
 
 public:
 	Wonderland();
@@ -28,33 +31,55 @@ public:
 
 
 public:
-
-
-	// Called when the application is initializing.
 	bool OnAppInitializing(Osp::App::AppRegistry& appRegistry);
-
-	// Called when the application is terminating.
 	bool OnAppTerminating(Osp::App::AppRegistry& appRegistry, bool forcedTermination = false);
-
-
-	// Called when the application's frame moves to the top of the screen.
 	void OnForeground(void);
-
-
-	// Called when this application's frame is moved from top of the screen to the background.
 	void OnBackground(void);
-
-	// Called when the system memory is not sufficient to run the application any further.
 	void OnLowMemory(void);
-
-	// Called when the battery level changes.
 	void OnBatteryLevelChanged(Osp::System::BatteryLevel batteryLevel);
+	void OnKeyPressed(const Osp::Ui::Control& source, Osp::Ui::KeyCode keyCode);
+	void OnKeyReleased(const Osp::Ui::Control& source, Osp::Ui::KeyCode keyCode);
+	void OnKeyLongPressed(const Osp::Ui::Control& source, Osp::Ui::KeyCode keyCode);
 
-	// Called when the screen turns on.
 	void OnScreenOn (void);
-
-	// Called when the screen turns off.
 	void OnScreenOff (void);
+
+	virtual void  OnActionPerformed (const Osp::Ui::Control &source, int actionId) {};
+	virtual void  OnTouchDoublePressed (const Osp::Ui::Control &source,	const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo) {};
+	virtual void  OnTouchFocusIn (const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo) {};
+	virtual void  OnTouchFocusOut (const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo) {};
+	virtual void  OnTouchLongPressed (const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo) {};
+	virtual void  OnTouchMoved (const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo) {};
+	virtual void  OnTouchPressed (const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo);
+	virtual void  OnTouchReleased (const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo);
+
+public:
+	void OnTimerExpired(Osp::Base::Runtime::Timer& timer);
+	bool Draw();
+
+private:
+	void Cleanup();
+	void getScreenDimensions(int& width, int &height) const;
+
+private:
+	static const int DEFAULT_FRAME_TIME = 30;
+	static const int MINIMUM_FRAME_TIME = 5;
+
+	static const int SCREEN_WIDTH = 800;
+	static const int SCREEN_HEIGHT = 480;
+
+	Osp::Graphics::Opengl::GLfloat     __angle;
+	Osp::Base::Runtime::Timer*         __pTimer;
+
+	Matrix m_matModelView;
+	Matrix m_matProjection;
+
+	Osp::Ui::Controls::Form*           __pForm;
+
+	long long m_lastFrameTime;
 };
 
-#endif
+#endif // IOS
+
+#endif // __WONDERLAND_H__
+
