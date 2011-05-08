@@ -14,7 +14,7 @@
 /*  understand and accept it fully.                                        */
 /*                                                                         */
 /***************************************************************************/
-
+#if 0
 #include <ft2build.h>
 #include FT_ADVANCES_H
 
@@ -2343,3 +2343,4 @@
 
 
 /* END */
+#endif

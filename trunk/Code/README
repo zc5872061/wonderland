@@ -1,20 +1,22 @@
 'Code' directory for the Wonderland project
 ===========================================
 
-In this directory all the C/C++/Objective-C code belonging to the project resides.
+In this directory all the C/C++/Objective-C code belonging to the project
+resides.
 
-As of now it include both the generic engine code (i.e. renderer, varius resource managers, platform
-interfaces etc.) and the game code (as of now BadBalls2 - a 3D version of a simple logic game released for bada).
+As of now it include both the generic engine code (i.e. renderer, varius 
+resource managers, platform interfaces etc.) and the game code (as of now 
+BadBalls2 - a 3D version of a simple logic game released for bada).
 
-In the future, once Lua is successuly integrated into the engine, game-specific code will be written in Lua and 
-put to a different directory (named 'Scripts' or something like that)
-
+In the future, once Lua is successuly integrated into the engine, 
+game-specific code will be written in Lua and put to a different directory 
+(named 'Scripts' or something like that).
 
 
 'Platforms' directory
 ==========================================
 
-The 'Platforms' directory holds platform-specific code which is require to 
+The 'Platforms' directory holds platform-specific code which is required to 
 run the Wonderland code. Inside this 'Platforms' directory there are 
 subdirectories, each for each platform.
 

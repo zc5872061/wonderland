@@ -32,7 +32,7 @@ Board::Board(const Vector& position) :
 	m_controller.prepareRandomBalls(Board::CREATING_COUNT);
 	getModel().addElement("mesh", "planeMesh");
 	getModel().getElement()->getMaterialInstance()->setMaterialName("textured");
-    getModel().getElement()->getMaterialInstance()->setValue("u_textureSampler", "brick_512x512");
+    getModel().getElement()->getMaterialInstance()->setValue("u_textureSampler", "brick_512x512.png");
 }
 
 Board::~Board()

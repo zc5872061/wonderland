@@ -196,10 +196,8 @@ void FontEngine::renderGlyphs(shared_ptr<GameBitmap> target)
     int lastWidth = 0;
     for(GlyphsContainer::iterator it = m_glyphs.begin(); it != m_glyphs.end(); ++it)
     {
-    	Log("Before glyph to bitmap");
         int error = FT_Glyph_To_Bitmap(&(*it), FT_RENDER_MODE_NORMAL, null, 1);
         assert(!error);
-        Log("Glyph to bitmap was successfull!");
         
         FT_BitmapGlyph bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(*it);
         if(bitmapGlyph->bitmap.width != 0)

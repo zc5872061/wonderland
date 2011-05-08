@@ -90,7 +90,6 @@
 #undef  FT_COMPONENT
 #define FT_COMPONENT  trace_smooth
 
-
 #ifdef _STANDALONE_
 
 
@@ -354,8 +353,11 @@ typedef ptrdiff_t  FT_PtrDist;
 
     int  band_size;
     int  band_shoot;
-
+#ifndef SHP
     ft_jmp_buf  jump_buffer;
+#else
+    void*		jump_buffer;
+#endif
 
     void*       buffer;
     long        buffer_size;
@@ -477,8 +479,10 @@ typedef ptrdiff_t  FT_PtrDist;
       pcell = &cell->next;
     }
 
+#ifndef SHP
     if ( ras.num_cells >= ras.max_cells )
       ft_longjmp( ras.jump_buffer, 1 );
+#endif
 
     cell        = ras.cells + ras.num_cells++;
     cell->x     = x;
@@ -1709,13 +1713,17 @@ typedef ptrdiff_t  FT_PtrDist;
       Init_Class_func_interface(&func_interface);
 #endif
 
+#ifndef SHP
     if ( ft_setjmp( ras.jump_buffer ) == 0 )
+#endif
     {
       error = FT_Outline_Decompose( &ras.outline, &func_interface, &ras );
       gray_record_cell( RAS_VAR );
     }
+#ifndef SHP
     else
       error = ErrRaster_Memory_Overflow;
+#endif
 
     return error;
   }

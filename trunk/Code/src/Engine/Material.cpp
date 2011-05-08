@@ -42,7 +42,7 @@ void Material::setUniform(const LocationInfo& location, const std::string& textu
 {
     glActiveTexture(GL_TEXTURE0);
     glUniform1i(location.location, 0);
-    glBindTexture(GL_TEXTURE_2D, Game::getInstance().getResourceManager().getBitmapId(textureName));
+    glBindTexture(GL_TEXTURE_2D, Game::getInstance().getResourceManager().getBitmapId(textureName)); // TODO: fix the problem with extensions
 }
 
 void Material::setUniform(const LocationInfo& location, const Vector& vector)

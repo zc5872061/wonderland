@@ -50,7 +50,9 @@ MaterialsManager::~MaterialsManager()
 
 void MaterialsManager::initialize()
 {
+#ifndef SHP // For some strange reason this crashes on bada. TODO: fix it
 	preloadMaterials();
+#endif
 }
 
 void MaterialsManager::preloadMaterials()
@@ -58,7 +60,7 @@ void MaterialsManager::preloadMaterials()
 	// Preloading materials should be considered as a fix to overcome some problems.
 	// No materials should be placed here without an explicit reason.
 
-	// Line is created in a separate thread so to overcome problems with glGetAttributeLocation
+	// Line is created in a separate thread so to overcome problems on iOS with glGetAttributeLocation
 	// called during opengl's 'begin()-end()' (not actual begin-end, but nevertheless, problems did appear...)
 	loadMaterial("line");
 }

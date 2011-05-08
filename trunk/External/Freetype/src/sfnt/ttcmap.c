@@ -3381,7 +3381,6 @@
 
 #endif /*FT_CONFIG_OPTION_PIC*/
 
-
   /* parse the `cmap' table and build the corresponding TT_CMap objects */
   /* in the current face                                                */
   /*                                                                    */
@@ -3452,12 +3451,14 @@
 
             valid.num_glyphs = (FT_UInt)face->max_profile.numGlyphs;
 
+#ifndef SHP // TODO: somehow check if this is not ruining anything on bada
             if ( ft_setjmp(
               *((ft_jmp_buf*)&FT_VALIDATOR( &valid )->jump_buffer) ) == 0 )
             {
               /* validate this cmap sub-table */
               error = clazz->validate( cmap, FT_VALIDATOR( &valid ) );
             }
+#endif
 
             if ( valid.validator.error == 0 )
             {

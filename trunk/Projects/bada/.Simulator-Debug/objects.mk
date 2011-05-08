@@ -4,4 +4,4 @@
 
 USER_OBJS :=
 
-LIBS := -losp_rt0 -lFGraphicsOpengl -lFGraphicsEgl -llibc-newlib -lFOsp
+LIBS := -losp_rt0 -lFreetypeBada -lFGraphicsOpengl -lFGraphicsEgl -llibc-newlib -lFOsp

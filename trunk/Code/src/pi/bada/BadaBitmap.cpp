@@ -28,10 +28,6 @@ BadaBitmap::BadaBitmap(const std::string& fileName) :
 	Osp::Base::String badaFile(fileName.c_str());
 	std::auto_ptr<Osp::Graphics::Bitmap> bitmap(s_image->DecodeN(badaFile, Osp::Graphics::BITMAP_PIXEL_FORMAT_ARGB8888));
 
-	if(bitmap.get() == null)
-	{
-		AppLog("Null bitmap given!");
-	}
 	AppAssertf(bitmap.get() != null, "BadaBitmap::BadaBitmap - could not load image %s", fileName.c_str());
 
 	m_width = bitmap->GetWidth();
