@@ -7,7 +7,7 @@
 
 #include "Shader.h"
 #include "GameFile.h"
-
+#include "StringHelper.h"
 #include "GLRenderer.h"
 
 Shader::Shader() :
@@ -40,6 +40,7 @@ Shader::Shader(const std::string& fileName, ShaderType type) :
 
     shared_ptr<GameFile> shaderFile = GameFile::openFile(fileName, "r");
 	std::string shaderText = shaderFile->read();
+
 	const char* shaderTextCstr = shaderText.c_str();
 
 	glShaderSource(m_shaderObject, 1, &shaderTextCstr, null);

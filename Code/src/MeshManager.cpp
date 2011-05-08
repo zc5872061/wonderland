@@ -49,7 +49,7 @@ BasicMesh* MeshManager::getMesh(const std::string& name)
 	assert(name.size() != 0);
 	if(m_meshes.find(name) == m_meshes.end())
 	{
-		m_meshes[name] = loadMesh(Constants::getRootPath()+name+MESH_FILE_EXTENSION, name);
+		m_meshes[name] = loadMesh(Constants::getRootPath() + Constants::getModelsDir()+name+MESH_FILE_EXTENSION, name);
 	}
 	return m_meshes[name];
 }

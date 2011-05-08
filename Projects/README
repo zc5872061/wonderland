@@ -5,6 +5,14 @@ This is the directory in which projects for various platforms are kept. Here
 project files for bada IDE, XCode or Eclpse are kept. Maybe more if another 
 platform arrives or a new IDE is used.
 
+
+External projects
+===========================================
+
+Project files for external source code are put into the 'External' directory
+here. They can be found under External/<project>/<architecture>. So for example
+Freetype for bada project can be found in External/Freetype/bada.
+
 -------------------------------------------
 
 Copyright (c) 2011, Artur Mazurek

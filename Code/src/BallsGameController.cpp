@@ -75,7 +75,7 @@ int BallsGameController::getCurrentColorsCount() const
 
 void BallsGameController::initialize()
 {
-	Game::getInstance().getMeshManager().getMesh(Ball::MESH_NAME); // load ball's mesh at startup
+	//Game::getInstance().getMeshManager().getMesh(Ball::MESH_NAME); // load ball's mesh at startup
 
 //    m_blockButton = BlockButton::spawn(Vector(0, 4, 0));
 }

@@ -28,6 +28,10 @@ namespace Constants
     std::string getRootPath();
     // Get path to the Materials directory relative to the root path
     std::string getMaterialsDir();
+    // Get the path to the bitmaps directory relative to the root path
+    std::string getBitmapsDir();
+    // Get path to the models directory relative to the root path
+    std::string getModelsDir();
     // Get path to the Fonts directory relative to the root path
     std::string getFontsDir();
     // Get path to the UI data files relative to the root path

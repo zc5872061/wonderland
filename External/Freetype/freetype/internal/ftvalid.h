@@ -83,8 +83,11 @@ FT_BEGIN_HEADER
     const FT_Byte*      limit;       /* `base' + sizeof(table) in memory */
     FT_ValidationLevel  level;       /* validation level                 */
     FT_Error            error;       /* error returned. 0 means success  */
-
+#ifndef SHP
     ft_jmp_buf          jump_buffer; /* used for exception handling      */
+#else
+    void*				jump_buffer;
+#endif
 
   } FT_ValidatorRec;
 

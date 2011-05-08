@@ -95,6 +95,7 @@
   ft_validator_error( FT_Validator  valid,
                       FT_Error      error )
   {
+#ifndef SHP
     /* since the cast below also disables the compiler's */
     /* type check, we introduce a dummy variable, which  */
     /* will be optimized away                            */
@@ -106,6 +107,7 @@
     /* throw away volatileness; use `jump_buffer' or the  */
     /* compiler may warn about an unused local variable   */
     ft_longjmp( *(ft_jmp_buf*) jump_buffer, 1 );
+#endif
   }
 
 

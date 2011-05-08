@@ -153,7 +153,7 @@ Wonderland::OnAppInitializing(AppRegistry& appRegistry)
 
 
 	BallsGameController* controller = new BallsGameController();
-//	controller->setDifficulty(BallsGameController::GD_EASY);
+	controller->setDifficulty(BallsGameController::GD_EASY);
 //	Game::getInstance().initializeController(controller);
 //	Log("Before set HUD");
 //	Game::getInstance().setHUD(std::auto_ptr<HUD>(new BallsHUD(SCREEN_WIDTH, SCREEN_HEIGHT)));

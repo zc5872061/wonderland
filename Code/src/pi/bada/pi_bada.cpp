@@ -31,6 +31,16 @@ namespace Constants
 		return "Materials/";
 	}
 
+	std::string getBitmapsDir()
+	{
+		return "Bitmaps/";
+	}
+
+	std::string getModelsDir()
+	{
+		return "Models/";
+	}
+
 	std::string getUiDataPath()
 	{
 		return "ui/";

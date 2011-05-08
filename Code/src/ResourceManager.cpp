@@ -40,7 +40,7 @@ GLuint ResourceManager::getBitmapId(const std::string& fileName)
 
 BitmapInfo ResourceManager::loadBitmap(const std::string& fileName)
 {
-	std::string fullName = Constants::getRootPath() + fileName;
+	std::string fullName = Constants::getRootPath() + Constants::getBitmapsDir() + fileName;
 	if(m_bitmaps.find(fileName) == m_bitmaps.end())
 	{
         shared_ptr<GameBitmap> bitmap;
