@@ -58,6 +58,16 @@ namespace Constants
         return "";
     }
     
+    std::string getModelsDir()
+    {
+        return "";
+    }
+    
+    std::string getBitmapsDir()
+    {
+        return "";
+    }
+    
     int getDpi()
     {
         return 326; // taken from wikipedia
