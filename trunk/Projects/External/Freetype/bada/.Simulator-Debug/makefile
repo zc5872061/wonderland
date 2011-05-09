@@ -20,15 +20,6 @@ REPOSITORY_ROOT := C:/bada/1.2.1/IDE/workspace/repository/FreetypeBada/Simulator
 -include Sources/src/cff/subdir.mk
 -include Sources/src/base/subdir.mk
 -include Sources/src/autofit/subdir.mk
--include .Simulator-Debug/Sources/src/truetype/subdir.mk
--include .Simulator-Debug/Sources/src/smooth/subdir.mk
--include .Simulator-Debug/Sources/src/sfnt/subdir.mk
--include .Simulator-Debug/Sources/src/raster/subdir.mk
--include .Simulator-Debug/Sources/src/psnames/subdir.mk
--include .Simulator-Debug/Sources/src/pshinter/subdir.mk
--include .Simulator-Debug/Sources/src/cff/subdir.mk
--include .Simulator-Debug/Sources/src/base/subdir.mk
--include .Simulator-Debug/Sources/src/autofit/subdir.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
