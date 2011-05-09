@@ -32,13 +32,4 @@ Sources/src/pshinter \
 Sources/src/cff \
 Sources/src/base \
 Sources/src/autofit \
-.Simulator-Debug/Sources/src/truetype \
-.Simulator-Debug/Sources/src/smooth \
-.Simulator-Debug/Sources/src/sfnt \
-.Simulator-Debug/Sources/src/raster \
-.Simulator-Debug/Sources/src/psnames \
-.Simulator-Debug/Sources/src/pshinter \
-.Simulator-Debug/Sources/src/cff \
-.Simulator-Debug/Sources/src/base \
-.Simulator-Debug/Sources/src/autofit \
 

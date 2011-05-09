@@ -104,7 +104,7 @@ Wonderland::OnAppInitializing(AppRegistry& appRegistry)
 		return false;
 	}
 
-	__pForm->SetOrientation(ORIENTATION_LANDSCAPE);
+	__pForm->SetOrientation(ORIENTATION_PORTRAIT);
 
 	r = GetAppFrame()->GetFrame()->AddControl(*__pForm);
 	if (IsFailed(r))
