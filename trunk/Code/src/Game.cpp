@@ -52,24 +52,36 @@ Game::~Game()
 
 void Game::initialize(std::auto_ptr<GameController> controller, std::auto_ptr<HUD> hud)
 {
+	Log("New renderer");
     m_renderer = new GLRenderer();
+    Log("New resources");
 	m_resources = new ResourceManager();
+	Log("New meshes");
 	m_meshes = new MeshManager();
+	Log("New physics");
 	m_physics = new PhysicsEngine();
+	Log("New materials");
 	m_materialsManager = new MaterialsManager();
     m_gameController = controller;
+    Log("New fonts");
     m_fontEngine = new FontEngine();
     
+    Log("Fonts initialized");
     getFontEngine().initialize();
 #ifndef SHP
     getRenderer().initialize();
 #endif
+    Log("Renderer initialize");
     getRenderer().getCamera().initialize(Constants::SCREEN_NARROW, Constants::SCREEN_WIDE, 30, 1, 100, Vector(0, 0, -26));
+    Log("Hud set and initialize");
     setHUD(hud);
     getHUD().initialize();
+    Log("Resources initialize");
     getResourceManager().initialize();
+    Log("Materials initialize");
     getMaterialsManager().initialize();
 
+    Log("Game controller initialize");
 	m_gameController->initialize();
 }
 
