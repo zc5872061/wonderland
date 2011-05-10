@@ -17,11 +17,13 @@
 
 
 #define FT_MAKE_OPTION_SINGLE_OBJECT
-
+// Compiling for bada with this would result in multiple symbol definitions
+// on iOS somehow it works
+#ifndef SHP
 #include <ft2build.h>
 #include "rastpic.c"
 #include "ftraster.c"
 #include "ftrend1.c"
-
+#endif
 
 /* END */

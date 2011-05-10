@@ -505,9 +505,24 @@
 <builder buildPath="${workspace_loc:/FreetypeBada/.Target-Debug}" command="cs-make" id="cdt.managedbuild.target.osp.gnu.target.builder.lib.debug.1801224155" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="bada Builder" superClass="cdt.managedbuild.target.osp.gnu.target.builder.lib.debug"/>
 <tool id="cdt.managedbuild.tool.osp.gnu.arm.archiver.lib.debug.1931811106" name="bada Archiver" superClass="cdt.managedbuild.tool.osp.gnu.arm.archiver.lib.debug"/>
 <tool id="cdt.managedbuild.tool.osp.gnu.target.cpp.compiler.lib.debug.1331695135" name="bada C++ Compiler" superClass="cdt.managedbuild.tool.osp.gnu.target.cpp.compiler.lib.debug">
+<option id="osp.gnu.target.cpp.compiler.debug.lib.option.preprocessor.def.1187177151" name="Defined symbols (-D)" superClass="osp.gnu.target.cpp.compiler.debug.lib.option.preprocessor.def" valueType="definedSymbols">
+<listOptionValue builtIn="false" value="SHP"/>
+<listOptionValue builtIn="false" value="_DEBUG"/>
+<listOptionValue builtIn="false" value="FT2_BUILD_LIBRARY"/>
+</option>
 <inputType id="cdt.managedbuild.tool.osp.gnu.cpp.compiler.input.1188020962" superClass="cdt.managedbuild.tool.osp.gnu.cpp.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.osp.gnu.target.c.compiler.lib.debug.752412725" name="bada C Compiler" superClass="cdt.managedbuild.tool.osp.gnu.target.c.compiler.lib.debug">
+<option id="osp.gnu.target.c.compiler.debug.lib.option.preprocessor.def.210294895" name="Defined symbols (-D)" superClass="osp.gnu.target.c.compiler.debug.lib.option.preprocessor.def" valueType="definedSymbols">
+<listOptionValue builtIn="false" value="SHP"/>
+<listOptionValue builtIn="false" value="FT2_BUILD_LIBRARY"/>
+<listOptionValue builtIn="false" value="_DEBUG"/>
+</option>
+<option id="osp.gnu.target.c.compiler.debug.lib.option.include.paths.2021177177" name="Include paths (-I)" superClass="osp.gnu.target.c.compiler.debug.lib.option.include.paths" valueType="includePath">
+<listOptionValue builtIn="false" value="&quot;${SDKROOT}/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${workspace_loc:/FreetypeBada/Sources}&quot;"/>
+<listOptionValue builtIn="false" value="&quot;${PROJECT_ROOT}/inc&quot;"/>
+</option>
 <inputType id="cdt.managedbuild.tool.osp.gnu.c.compiler.input.1915487037" superClass="cdt.managedbuild.tool.osp.gnu.c.compiler.input"/>
 </tool>
 <tool id="cdt.managedbuild.tool.osp.gnu.arm.c.linker.base.234324136" name="bada C Linker" superClass="cdt.managedbuild.tool.osp.gnu.arm.c.linker.base"/>

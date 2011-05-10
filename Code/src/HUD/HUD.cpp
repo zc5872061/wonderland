@@ -17,8 +17,8 @@ const std::string HUD::DEFAULT_STATE_NAME("DefaultState");
 
 HUD::HUD() :
     m_pressedControl(null),
-#if defined (SHP)
-    m_flipUI(true),
+#if defined (SHP) // TODO - is this UI flip really needed? This is actually quite strange
+    m_flipUI(false),
 #elif defined (IOS)
 	m_flipUI(false),
 #else
