@@ -57,10 +57,20 @@ private:
     typedef std::map<std::string, shared_ptr<GameBitmap> > FontFacesContainer;
     FontFacesContainer m_fontFaces;
     
-    typedef std::vector<FT_Glyph> GlyphsContainer;
+    struct GlyphData
+    {
+        FT_Glyph glyph;
+        FT_BBox bounds;
+    };
+    
+    typedef std::vector<GlyphData> GlyphsContainer;
     GlyphsContainer m_glyphs;
     
     int m_size;
+    // The distance in pixels from the current bitmap's top border
+    // to the font baseline, i.e. the line to which all the separate
+    // glyph bitmaps should be aligned.
+    int m_currentBaseLine;
     
 private:
     void loadFace(const std::string& fileName);

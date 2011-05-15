@@ -112,7 +112,7 @@
 		75B1088D1375E9B4002647F6 /* vertex_textured.fx in Resources */ = {isa = PBXBuildFile; fileRef = 75B108611375E9A1002647F6 /* vertex_textured.fx */; };
 		75B1088E1375E9B4002647F6 /* ui_bada.dti in Resources */ = {isa = PBXBuildFile; fileRef = 75B108631375E9A1002647F6 /* ui_bada.dti */; };
 		75B1088F1375E9B4002647F6 /* ui_iOS.dti in Resources */ = {isa = PBXBuildFile; fileRef = 75B108641375E9A1002647F6 /* ui_iOS.dti */; };
-		75B108951375EDE2002647F6 /* mailrays.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75B108941375EDE2002647F6 /* mailrays.ttf */; };
+		75F8623513803CFF00E7A603 /* BIOS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75F8623413803CFF00E7A603 /* BIOS.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -285,7 +285,7 @@
 		75B108611375E9A1002647F6 /* vertex_textured.fx */ = {isa = PBXFileReference; lastKnownFileType = text; path = vertex_textured.fx; sourceTree = "<group>"; };
 		75B108631375E9A1002647F6 /* ui_bada.dti */ = {isa = PBXFileReference; lastKnownFileType = text; path = ui_bada.dti; sourceTree = "<group>"; };
 		75B108641375E9A1002647F6 /* ui_iOS.dti */ = {isa = PBXFileReference; lastKnownFileType = text; path = ui_iOS.dti; sourceTree = "<group>"; };
-		75B108941375EDE2002647F6 /* mailrays.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = mailrays.ttf; sourceTree = "<group>"; };
+		75F8623413803CFF00E7A603 /* BIOS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BIOS.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -627,7 +627,7 @@
 		75B108441375E9A1002647F6 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				75B108941375EDE2002647F6 /* mailrays.ttf */,
+				75F8623413803CFF00E7A603 /* BIOS.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -799,7 +799,7 @@
 				75A6A81D1375C39500B3E02E /* Shader.fsh in Resources */,
 				75A6A81F1375C39500B3E02E /* Shader.vsh in Resources */,
 				75A6A8281375C39500B3E02E /* XCodeProjectViewController.xib in Resources */,
-				75B108951375EDE2002647F6 /* mailrays.ttf in Resources */,
+				75F8623513803CFF00E7A603 /* BIOS.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,7 +986,7 @@
 					DEBUG,
 				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					../../Code/inc,
 					../../External/Boost,
@@ -1011,7 +1011,7 @@
 				GCC_PREFIX_HEADER = "XCodeProject/XCodeProject-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = IOS;
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
-				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = YES;
+				GCC_WARN_EFFECTIVE_CPLUSPLUS_VIOLATIONS = NO;
 				HEADER_SEARCH_PATHS = (
 					../../Code/inc,
 					../../External/Boost,
