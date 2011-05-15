@@ -23,9 +23,10 @@ static std::string _createKey(const std::string& text, int size)
 FontEngine::FontEngine() : 
     m_library(0),
     m_face(0),
-    m_size(12)
+    m_size(12),
+    m_currentBaseLine(0)
 {
-    m_fontFaces["mailrays.ttf"] = shared_ptr<GameBitmap>();
+    m_fontFaces["BIOS.ttf"] = shared_ptr<GameBitmap>();
 }
 
 FontEngine::~FontEngine()
@@ -37,7 +38,7 @@ void FontEngine::initialize()
 {
     int error = FT_Init_FreeType(&m_library);
     assert(!error && "Everything dies if the fonts cannot be created...");
-
+    
     for(FontFacesContainer::iterator it = m_fontFaces.begin(); it != m_fontFaces.end(); ++it)
     {
         loadFace(it->first);
@@ -47,9 +48,9 @@ void FontEngine::initialize()
 void FontEngine::loadFace(const std::string& fileName)
 {
     std::string fullPath = Constants::getRootPath() + Constants::getFontsDir() + fileName;
-
+    
     Log("Opening font at %s", fullPath.c_str());
-
+    
     FT_Face face;
     
     int error = FT_New_Face(m_library, fullPath.c_str(), 0, &face);
@@ -64,7 +65,7 @@ void FontEngine::loadFace(const std::string& fileName)
     
     FT_Set_Char_Size(face, 0, m_size*64, Constants::getDpi(), 0);
     //FT_Set_Pixel_Sizes(m_face, 64, 0); // it would be better if this was working...
-
+    
     m_face = face;
 }
 
@@ -105,10 +106,10 @@ shared_ptr<GameBitmap> FontEngine::getFontBitmapPositioned(const std::string& te
 }
 
 shared_ptr<GameBitmap> FontEngine::getFontBitmapPositioned(const std::string& text,
-                                               int width, int height,
-                                               Common::HorizontalAlignment hAlign,
-                                               Common::VerticalAlignment vAlign,
-                                               const Common::Color& color)
+                                                           int width, int height,
+                                                           Common::HorizontalAlignment hAlign,
+                                                           Common::VerticalAlignment vAlign,
+                                                           const Common::Color& color)
 {
     shared_ptr<GameBitmap> pure = getFontBitmap(text);
     shared_ptr<GameBitmap> result = GameBitmap::createBitmap(width, height);
@@ -126,16 +127,17 @@ void FontEngine::copyBitmap(const FT_Bitmap* source, shared_ptr<GameBitmap> targ
 {
     const int width = source->width;
     const int height = source->rows;
-
-    assert(width <= target->getWidth());
-    assert(height <= target->getHeight());
-
+    
+    assert(width + x <= target->getWidth());
+    assert(height + y <= target->getHeight());
+    
+    Common::Pixel* p = null;
     
 	for (int j = 0; j < height; j++)
 	{
 		for (int i = 0; i < width; i++)
 		{
-            Common::Pixel* p = target->getPixel(i + x, j);
+            p = target->getPixel(i + x, j + y);
             memset(p, source->buffer[j*width + i], sizeof(Common::Pixel));
 		}
 	}
@@ -153,7 +155,8 @@ void FontEngine::prepareGlyphs(const std::string& source)
         error = FT_Get_Glyph(m_face->glyph, &glyph);
         assert(!error);
         
-        m_glyphs.push_back(glyph);
+        GlyphData gd = {glyph, 0};
+        m_glyphs.push_back(gd);
     }
 }
 
@@ -163,11 +166,32 @@ shared_ptr<GameBitmap> FontEngine::createValidBitmap()
     int width = 0;
     int height = 0;
     int lastWidth = 0;
+    m_currentBaseLine = 0;
     FT_BBox bounds;
-    for(GlyphsContainer::iterator it = m_glyphs.begin(); it != m_glyphs.end(); ++it)
+    
+    int yMax = 0; // the max bounds.yMax in the set
+    int yMin = 0; // the min bounds.yMin in the 
+    
+    // What happens here is that for every bitmap it's width is calculated
+    // and added to the total width, to get the proper horizontal size of the bitmap
+    // needed.
+    // Also the extremal values of bounds.yMax and .yMin are found to get the proper
+    // height of the bitmap.
+    // Later on, after the loop they will be calculated.
+    GlyphsContainer::iterator end = m_glyphs.end();
+    for(GlyphsContainer::iterator it = m_glyphs.begin(); it != end; ++it)
     {
-        FT_Glyph_Get_CBox(*it, FT_GLYPH_BBOX_TRUNCATE, &bounds);
-        int currentWidth = bounds.xMax-bounds.xMin;
+        // Glyph has to converted to bitmap first, to have proper metrics while
+        // taking the bounds.
+        int error = FT_Glyph_To_Bitmap(&((*it).glyph), FT_RENDER_MODE_NORMAL, null, 1);
+        assert(!error);
+        
+        FT_Glyph_Get_CBox((*it).glyph, FT_GLYPH_BBOX_TRUNCATE, &bounds);
+        (*it).bounds = bounds; // save for later, to be used while copying fonts' bitmaps
+                                // to the target bitmap
+        
+        int currentWidth = bounds.xMax - bounds.xMin;
+        
         if(currentWidth == 0)
         {
             width += lastWidth >> 2;
@@ -179,14 +203,17 @@ shared_ptr<GameBitmap> FontEngine::createValidBitmap()
         
         width += currentWidth;
         if(bounds.xMin <= 0) width += 1; // to make it counted from 0;
-
-        // Takes into amount full height, including element 'zero'
-        int correctedHeight = bounds.yMax - bounds.yMin;
-        if(bounds.yMin <= 0) correctedHeight += 1;
-        height = correctedHeight > height ? correctedHeight : height;
+        
+        Log("Current bounds are: %ld, %ld", bounds.yMax, bounds.yMin);
+        yMax = yMax > bounds.yMax ? yMax : bounds.yMax;
+        yMin = yMin < bounds.yMin ? yMin : bounds.yMin;
     }
+    // And the current baseline that should be counted from top
+    m_currentBaseLine = yMax;
     
     width += m_glyphs.size() - 1; // To have 1 pixel distance between numbers
+    height = yMax - yMin;
+
     return GameBitmap::createBitmap(width, height);
 }
 
@@ -194,20 +221,22 @@ void FontEngine::renderGlyphs(shared_ptr<GameBitmap> target)
 {
     int advance = 0;
     int lastWidth = 0;
-    for(GlyphsContainer::iterator it = m_glyphs.begin(); it != m_glyphs.end(); ++it)
+    
+    GlyphsContainer::iterator end = m_glyphs.end();
+    for(GlyphsContainer::iterator it = m_glyphs.begin(); it != end; ++it)
     {
-        int error = FT_Glyph_To_Bitmap(&(*it), FT_RENDER_MODE_NORMAL, null, 1);
-        assert(!error);
-        
-        FT_BitmapGlyph bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>(*it);
+        FT_BitmapGlyph bitmapGlyph = reinterpret_cast<FT_BitmapGlyph>((*it).glyph);
         if(bitmapGlyph->bitmap.width != 0)
         {
-            copyBitmap(&(bitmapGlyph->bitmap), target, advance, 0);
+            copyBitmap(&(bitmapGlyph->bitmap), target, advance, m_currentBaseLine - (*it).bounds.yMax);
+            
             advance += bitmapGlyph->bitmap.width;
             lastWidth = bitmapGlyph->bitmap.width;
         }
         else
         {
+            // If the bitmap is empty (i.e. space character) we want it to be
+            // the width of previous character / 4.
             advance += lastWidth >> 2;
         }
     }
@@ -217,7 +246,7 @@ void FontEngine::destroyGlyphs()
 {
     for(GlyphsContainer::iterator it = m_glyphs.begin(); it != m_glyphs.end(); ++it)
     {
-        FT_Done_Glyph(*it);
+        FT_Done_Glyph((*it).glyph);
     }
     m_glyphs.clear();
 }

@@ -51,7 +51,7 @@ void BallsHUD::onInitializing()
 	pButton->setNormalBitmap("new_game_normal.png");
 	pButton->setPressedBitmap("new_game_pressed.png");
     pButton->setText("New Game");
-    pButton->setTextSize(20);
+    pButton->setTextSize(24);
     pButton->setTextColor(80, 80, 100);
 	addControl(pButton);
 
