@@ -112,6 +112,7 @@
 		75B1088D1375E9B4002647F6 /* vertex_textured.fx in Resources */ = {isa = PBXBuildFile; fileRef = 75B108611375E9A1002647F6 /* vertex_textured.fx */; };
 		75B1088E1375E9B4002647F6 /* ui_bada.dti in Resources */ = {isa = PBXBuildFile; fileRef = 75B108631375E9A1002647F6 /* ui_bada.dti */; };
 		75B1088F1375E9B4002647F6 /* ui_iOS.dti in Resources */ = {isa = PBXBuildFile; fileRef = 75B108641375E9A1002647F6 /* ui_iOS.dti */; };
+		75E9679C138315C20009C49D /* RegParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 75E9679B138315C20009C49D /* RegParser.cpp */; };
 		75F8623513803CFF00E7A603 /* BIOS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75F8623413803CFF00E7A603 /* BIOS.ttf */; };
 /* End PBXBuildFile section */
 
@@ -285,6 +286,8 @@
 		75B108611375E9A1002647F6 /* vertex_textured.fx */ = {isa = PBXFileReference; lastKnownFileType = text; path = vertex_textured.fx; sourceTree = "<group>"; };
 		75B108631375E9A1002647F6 /* ui_bada.dti */ = {isa = PBXFileReference; lastKnownFileType = text; path = ui_bada.dti; sourceTree = "<group>"; };
 		75B108641375E9A1002647F6 /* ui_iOS.dti */ = {isa = PBXFileReference; lastKnownFileType = text; path = ui_iOS.dti; sourceTree = "<group>"; };
+		75E9679A138315AF0009C49D /* RegParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegParser.h; sourceTree = "<group>"; };
+		75E9679B138315C20009C49D /* RegParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RegParser.cpp; sourceTree = "<group>"; };
 		75F8623413803CFF00E7A603 /* BIOS.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BIOS.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -446,6 +449,7 @@
 		75A6A85D1375C8D100B3E02E /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				75E9679A138315AF0009C49D /* RegParser.h */,
 				75A6A85E1375C8D100B3E02E /* BasicMesh.h */,
 				75A6A85F1375C8D100B3E02E /* Material.h */,
 				75A6A8601375C8D100B3E02E /* MaterialInstance.h */,
@@ -538,6 +542,7 @@
 		75A6A8981375C8D100B3E02E /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				75E9679B138315C20009C49D /* RegParser.cpp */,
 				75A6A8991375C8D100B3E02E /* BasicMesh.cpp */,
 				75A6A89A1375C8D100B3E02E /* Material.cpp */,
 				75A6A89B1375C8D100B3E02E /* MaterialInstance.cpp */,
@@ -883,6 +888,7 @@
 				75A6A8F51375C8D100B3E02E /* StringHelper.cpp in Sources */,
 				75A6A8F61375C8D100B3E02E /* Vector.cpp in Sources */,
 				75B107FD1375E65E002647F6 /* XCodeProjectViewController.mm in Sources */,
+				75E9679C138315C20009C49D /* RegParser.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
