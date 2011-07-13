@@ -10,6 +10,8 @@
 #include <FBase.h>
 #include <FGraphics.h>
 
+#include <algorithm>
+
 Osp::Media::Image* BadaBitmap::s_image(null);
 
 BadaBitmap::BadaBitmap(const std::string& fileName) :
@@ -34,6 +36,8 @@ BadaBitmap::BadaBitmap(const std::string& fileName) :
 	m_height = bitmap->GetHeight();
 
 	copyBitmap(bitmap.get());
+
+	fixColors();
 }
 
 BadaBitmap::BadaBitmap(int width, int height) :
@@ -101,4 +105,15 @@ void BadaBitmap::copyBitmap(Osp::Graphics::Bitmap* bitmap)
 	memcpy(m_pixels, bi.pPixels, pixelCount);
 
 	bitmap->Unlock();
+}
+
+void BadaBitmap::fixColors()
+{
+	size_t size = m_width * m_height * getByteColorDepth();
+	const int step = getByteColorDepth();
+
+	for(size_t i = 0; i < size; i+=step)
+	{
+		std::swap(m_pixels[i], m_pixels[i+2]);
+	}
 }
