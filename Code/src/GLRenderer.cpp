@@ -45,6 +45,7 @@ bool GLRenderer::initialize(EGLNativeWindowType window)
 #endif
 {
 #ifndef IOS
+	Log("Initializing OpenGL");
 	if(!InitEGL(window))
 	{
 		Log("[GlesCube] GlesCube can run on systems which supports OpenGL ES(R) 2.0.");

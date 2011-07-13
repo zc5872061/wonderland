@@ -50,7 +50,7 @@ Game::~Game()
     delete m_materialsManager;
 }
 
-void Game::initialize(std::auto_ptr<GameController> controller, std::auto_ptr<HUD> hud)
+void Game::initialize(std::auto_ptr<GameController> controller)
 {
 	Log("New renderer");
     m_renderer = new GLRenderer();
@@ -73,9 +73,7 @@ void Game::initialize(std::auto_ptr<GameController> controller, std::auto_ptr<HU
 #endif
     Log("Renderer initialize");
     getRenderer().getCamera().initialize(Constants::SCREEN_NARROW, Constants::SCREEN_WIDE, 30, 1, 100, Vector(0, 0, -26));
-    Log("Hud set and initialize");
-    setHUD(hud);
-    getHUD().initialize();
+
     Log("Resources initialize");
     getResourceManager().initialize();
     Log("Materials initialize");
@@ -83,6 +81,13 @@ void Game::initialize(std::auto_ptr<GameController> controller, std::auto_ptr<HU
 
     Log("Game controller initialize");
 	m_gameController->initialize();
+}
+
+void Game::setHud(std::auto_ptr<HUD> hud)
+{
+	 Log("Hud set and initialize");
+	setHUD(hud);
+	getHUD().initialize();
 }
 
 #ifndef IOS

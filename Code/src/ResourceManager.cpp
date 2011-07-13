@@ -63,13 +63,12 @@ BitmapInfo ResourceManager::registerForOpenGL(shared_ptr<GameBitmap> bitmap, con
     unsigned char* data = reinterpret_cast<unsigned char*>(bi.bitmap->getBitmap());
     
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-#if defined (SHP)
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_BYTE, data);
-#elif defined (IOS)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-#else
-#error // please define the upper function
-#endif
+
+    int error = glGetError();
+    if(error != GL_NO_ERROR) {
+    	Log("GL error 0x%x with texture %s.", error, name.c_str());
+    }
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

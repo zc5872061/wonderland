@@ -33,7 +33,8 @@ public:
 	static Game& getInstance();
 	static void cleanup();
     // Obviously this method must be called exactly once
-    void initialize(std::auto_ptr<GameController> controller, std::auto_ptr<HUD> hud);
+    void initialize(std::auto_ptr<GameController> controller);
+    void setHud(std::auto_ptr<HUD> hud);
 #ifdef SHP
 	bool initializeGraphics(EGLNativeWindowType window);
 #endif

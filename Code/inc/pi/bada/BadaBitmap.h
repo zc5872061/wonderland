@@ -28,6 +28,9 @@ public:
 	virtual int getByteColorDepth() const;
 
 private:
+	void fixColors(); // swaps red with blue
+
+private:
 	static Osp::Media::Image* s_image;
 
 	unsigned char* m_pixels;

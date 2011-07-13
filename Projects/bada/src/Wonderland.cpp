@@ -157,8 +157,11 @@ Wonderland::OnAppInitializing(AppRegistry& appRegistry)
 //	Game::getInstance().initializeController(controller);
 //	Log("Before set HUD");
 //	Game::getInstance().setHUD(std::auto_ptr<HUD>(new BallsHUD(SCREEN_WIDTH, SCREEN_HEIGHT)));
-	Game::getInstance().initialize(std::auto_ptr<GameController>(controller), std::auto_ptr<HUD>(new BallsHUD()));
+
+	Game::getInstance().initialize(std::auto_ptr<GameController>(controller));
 	Game::getInstance().initializeGraphics((EGLNativeWindowType)__pForm);
+	Game::getInstance().setHud(std::auto_ptr<HUD>(new BallsHUD()));
+
 //	Game::getInstance().initializeActors();
 //	Game::getInstance().getRenderer().getCamera().initialize(SCREEN_WIDTH, SCREEN_HEIGHT, 27, 1, 100, Vector(0, 0, -20));
 //	Game::getInstance().getHUD().initialize();
