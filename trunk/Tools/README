@@ -11,6 +11,8 @@ As of now there will be two tools here:
 * BadaResCopy.py - this script will (automatically, during build) copy all the
   resources that are kept in the 'Resources' directory to the bada project
   'Res' directory - bada has a rather non-flexible resource management system
+  (this one to be put here in the future)
+* More to come...
 
 -------------------------------------------
 
