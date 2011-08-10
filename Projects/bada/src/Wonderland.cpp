@@ -288,10 +288,10 @@ Wonderland::OnScreenOff (void)
 
 void Wonderland::OnTouchPressed(const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo)
 {
-	Game::getInstance().touchPressed(currentPosition.x,SCREEN_HEIGHT - currentPosition.y);
+	Game::getInstance().touchPressed(currentPosition.x, currentPosition.y);
 }
 
 void Wonderland::OnTouchReleased(const Osp::Ui::Control &source, const Osp::Graphics::Point &currentPosition, const Osp::Ui::TouchEventInfo &touchInfo)
 {
-	Game::getInstance().touchReleased(currentPosition.x,SCREEN_HEIGHT - currentPosition.y);
+	Game::getInstance().touchReleased(currentPosition.x, currentPosition.y);
 }

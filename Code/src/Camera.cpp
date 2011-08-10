@@ -54,7 +54,8 @@ void Camera::setPosition(const Vector& pos)
 Vector Camera::getPosition() const
 {
 	Vector result = Actor::getPosition();
-	result.z *= -1;
+	// Result times -1 because that's the wa OpenGL works
+	result *= -1;
 	return result;
 }
 
@@ -95,10 +96,10 @@ Ray Camera::getRay(int x, int y) const
 	Vector far = unproject(Vector(x, y, 10));
 	Vector diff = far - near;
 	diff.normalize();
-	diff *= -1; // fix for the problem that camera is actually positioned negativelly in space ;)
-#if defined (IOS)
-    diff.y *= -1;
-#endif
+	// fix for the fact that camera is actually positioned negativelly in space ;)
+    diff.x *= -1;
+    diff.z *= -1;
+
 	return Ray(near, diff);
 }
 
