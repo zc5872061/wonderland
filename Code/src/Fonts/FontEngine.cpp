@@ -145,7 +145,7 @@ void FontEngine::copyBitmap(const FT_Bitmap* source, shared_ptr<GameBitmap> targ
 
 void FontEngine::prepareGlyphs(const std::string& source)
 {
-    for(int i = 0; i < source.size(); ++i)
+    for(size_t i = 0; i < source.size(); ++i)
     {
         FT_UInt glyphIndex = FT_Get_Char_Index(m_face, source[i]);
         int error = FT_Load_Glyph(m_face, glyphIndex, FT_LOAD_DEFAULT);
@@ -155,7 +155,7 @@ void FontEngine::prepareGlyphs(const std::string& source)
         error = FT_Get_Glyph(m_face->glyph, &glyph);
         assert(!error);
         
-        GlyphData gd = {glyph, 0};
+        GlyphData gd = {glyph, {0, 0, 0, 0}};
         m_glyphs.push_back(gd);
     }
 }

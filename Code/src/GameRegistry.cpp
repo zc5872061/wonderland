@@ -24,3 +24,51 @@ shared_ptr<GameRegistry> GameRegistry::createRegistry()
 	#error
 #endif
 }
+
+int GameRegistry::getIntDef(const std::string& key, int def)
+{
+	if(!hasKey(key))
+	{
+		return def;
+	}
+
+	int result = 0;
+	if(!getInt(key, result))
+	{
+		return def;
+	}
+
+	return result;
+}
+
+double GameRegistry::getDoubleDef(const std::string& key, double def)
+{
+	if(!hasKey(key))
+	{
+		return def;
+	}
+
+	double result = 0;
+	if(!getDouble(key, result))
+	{
+		return def;
+	}
+
+	return result;
+}
+
+std::string GameRegistry::getStringDef(const std::string& key, const std::string& def)
+{
+	if(!hasKey(key))
+	{
+		return def;
+	}
+
+	std::string result = 0;
+	if(!getString(key, result))
+	{
+		return def;
+	}
+
+	return result;
+}

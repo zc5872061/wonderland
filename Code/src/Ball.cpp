@@ -51,10 +51,10 @@ Ball::Ball(const Vector& position, Color color) :
 	m_selected(false),
 	m_ballColor(BALL_ENUM_SIZE),
 	m_elapsedTime(0),
+	m_ambientColor(0.1f, 0.1f, 0.1f),
 	m_stateFalling(this),
 	m_stateWaiting(this),
-	m_stateDisappearing(this),
-    m_ambientColor(0.1f, 0.1f, 0.1f)
+	m_stateDisappearing(this)
 {
 	registerState(&m_stateFalling, STATE_FALLING_NAME);
 	registerState(&m_stateWaiting, STATE_WAITING_NAME);

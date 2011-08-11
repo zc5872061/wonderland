@@ -41,9 +41,9 @@ BadaBitmap::BadaBitmap(const std::string& fileName) :
 }
 
 BadaBitmap::BadaBitmap(int width, int height) :
+	m_pixels(0),
 	m_width(width),
-	m_height(height),
-	m_pixels(0)
+	m_height(height)
 {
 	m_pixels = new unsigned char[m_width * m_height * getByteColorDepth()];
 }
