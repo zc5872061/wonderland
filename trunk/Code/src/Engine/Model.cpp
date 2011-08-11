@@ -118,7 +118,7 @@ Model::ModelElement* Model::getElement(const std::string& name)
 
 Model::ModelElement* Model::getElement(int index)
 {
-    assert(index >= 0 && index < m_meshes.size());
+    assert(index >= 0 && index < (int)m_meshes.size());
     return m_meshes[index];
 }
 

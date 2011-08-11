@@ -19,7 +19,7 @@ namespace StringHelper
         
         std::string result = text;
         
-        int i = 0;
+        size_t i = 0;
         while(stripChar.find(text[i]) != std::string::npos)
         {
             ++i;
@@ -48,7 +48,7 @@ namespace StringHelper
     {
         int tokenStart = -1;
         
-        for(int i = 0; i < source.size(); ++i)
+        for(size_t i = 0; i < source.size(); ++i)
         {
             if(tokens.find(source[i]) != std::string::npos)
             {
