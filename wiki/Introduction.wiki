@@ -5,7 +5,7 @@
 I decided to no longer develop this project. Sorry for everyone interested in it but anyway it was in a very early stage, so no very useful. The main reason is that there are already better solutions usually already working.
 
 I suggest trying this one - [http://www.cocos2d-x.org/] - works for android, bada, iOS. Many tutorials on web.
-I
+
 My blog is here - [http://smart-title.blogspot.com]
 
 = Introduction =
